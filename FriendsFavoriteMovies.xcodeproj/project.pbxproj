@@ -18,6 +18,7 @@
 		644B9FBA2BE00BC4008475BF /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644B9FB92BE00BC4008475BF /* FriendListView.swift */; };
 		644B9FBC2BE0118C008475BF /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644B9FBB2BE0118C008475BF /* FriendDetailView.swift */; };
 		644B9FBE2BE014D3008475BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644B9FBD2BE014D3008475BF /* ContentView.swift */; };
+		644B9FC02BE02556008475BF /* FilteredMovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644B9FBF2BE02556008475BF /* FilteredMovieListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		644B9FB92BE00BC4008475BF /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
 		644B9FBB2BE0118C008475BF /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
 		644B9FBD2BE014D3008475BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = FriendsFavoriteMovies/ContentView.swift; sourceTree = SOURCE_ROOT; };
+		644B9FBF2BE02556008475BF /* FilteredMovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredMovieListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				644B9FB92BE00BC4008475BF /* FriendListView.swift */,
 				6434F28A2BDC2BBA000EAFD0 /* MovieDetailView.swift */,
 				6434F2792BDC0E3F000EAFD0 /* MovieListView.swift */,
+				644B9FBF2BE02556008475BF /* FilteredMovieListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				644B9FBA2BE00BC4008475BF /* FriendListView.swift in Sources */,
 				644B9FBE2BE014D3008475BF /* ContentView.swift in Sources */,
 				644B9FB82BDFDF35008475BF /* Friend.swift in Sources */,
+				644B9FC02BE02556008475BF /* FilteredMovieListView.swift in Sources */,
 				6434F2782BDC0E3F000EAFD0 /* FriendsFavoriteMoviesApp.swift in Sources */,
 				6434F2882BDC11E8000EAFD0 /* SampleData.swift in Sources */,
 			);

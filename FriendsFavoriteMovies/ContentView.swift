@@ -17,7 +17,7 @@ struct ContentView: View {
 		TabView {
 			
 			// Tab 1
-			MovieListView()
+			FilteredMovieListView()
 				.tabItem {
 					Label("Movies", systemImage: "film.stack")
 				}

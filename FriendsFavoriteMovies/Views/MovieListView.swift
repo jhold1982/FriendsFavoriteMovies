@@ -12,52 +12,56 @@ struct MovieListView: View {
 	
 	// MARK: - PROPERTIES
     @Environment(\.modelContext) private var modelContext
-	@Query(sort: \Movie.title) private var movies: [Movie]
+	@Query private var movies: [Movie]
 
 	@State private var newMovie: Movie?
 	
+	init(titleFilter: String = "") {
+		let predicate = #Predicate<Movie> { movie in
+			titleFilter.isEmpty || movie.title.localizedStandardContains(titleFilter)
+		}
+		
+		_movies = Query(filter: predicate, sort: \Movie.title)
+	}
+	
 	// MARK: - VIEW BODY
     var body: some View {
-        NavigationSplitView {
-			Group {
-				if !movies.isEmpty {
-					List {
-						ForEach(movies) { movie in
-							NavigationLink {
-								MovieDetailView(movie: movie)
-							} label: {
-								Text(movie.title)
-							}
+		
+		Group {
+			if !movies.isEmpty {
+				List {
+					ForEach(movies) { movie in
+						NavigationLink {
+							MovieDetailView(movie: movie)
+						} label: {
+							Text(movie.title)
 						}
-						.onDelete(perform: deleteItems)
 					}
-				} else {
-					ContentUnavailableView {
-						Label("No Movies", systemImage: "film.stack")
-					}
+					.onDelete(perform: deleteItems)
+				}
+			} else {
+				ContentUnavailableView {
+					Label("No Movies", systemImage: "film.stack")
 				}
 			}
-			.navigationTitle("Movies")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addMovie) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-			.sheet(item: $newMovie) { movie in
-				NavigationStack {
-					MovieDetailView(movie: SampleData.shared.movie)
-				}
-				.interactiveDismissDisabled()
+		}
+		.navigationTitle("Movies")
+		.toolbar {
+			ToolbarItem(placement: .navigationBarTrailing) {
+				EditButton()
 			}
-        } detail: {
-            Text("Select a movie")
-				.navigationTitle("Movie")
-        }
+			ToolbarItem {
+				Button(action: addMovie) {
+					Label("Add Item", systemImage: "plus")
+				}
+			}
+		}
+		.sheet(item: $newMovie) { movie in
+			NavigationStack {
+				MovieDetailView(movie: SampleData.shared.movie)
+			}
+			.interactiveDismissDisabled()
+		}
     }
 
 	// MARK: - FUNCTIONS
@@ -82,11 +86,22 @@ struct MovieListView: View {
 }
 
 #Preview {
-	MovieListView()
-		.modelContainer(SampleData.shared.modelContainer)
+	NavigationStack {
+		MovieListView()
+			.modelContainer(SampleData.shared.modelContainer)
+	}
 }
 
 #Preview("Empty List") {
-	MovieListView()
-		.modelContainer(for: Movie.self, inMemory: true)
+	NavigationStack {
+		MovieListView()
+			.modelContainer(for: Movie.self, inMemory: true)
+	}
+}
+
+#Preview("Filtered") {
+	NavigationStack {
+		MovieListView(titleFilter: "tr")
+			.modelContainer(SampleData.shared.modelContainer)
+	}
 }

@@ -21,6 +21,12 @@ struct MovieDetailView: View {
 		self.isNew = isNew
 	}
 	
+	var sortedFriends: [Friend] {
+		movie.favoritedBy.sorted { first, second in
+			first.name < second.name
+		}
+	}
+	
 	// MARK: - VIEW BODY
     var body: some View {
 		Form {
@@ -33,11 +39,14 @@ struct MovieDetailView: View {
 				displayedComponents: .date
 			)
 			
-			Section("Favorited by:") {
-				ForEach(movie.favoritedBy) { friend in
-					Text(friend.name)
+			if !movie.favoritedBy.isEmpty {
+				Section("Favorited by:") {
+					ForEach(sortedFriends) { friend in
+						Text(friend.name)
+					}
 				}
 			}
+			
 			
 		}
 		.navigationTitle(isNew ? "New Movie" : "Movie")
