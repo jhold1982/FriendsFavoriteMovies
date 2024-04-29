@@ -12,7 +12,8 @@ import SwiftData
 struct FriendsFavoriteMoviesApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Movie.self,
+			Friend.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct FriendDetailView: View {
 	
@@ -14,6 +15,8 @@ struct FriendDetailView: View {
 	
 	@Environment(\.dismiss) private var dismiss
 	@Environment(\.modelContext) private var modelContext
+	
+	@Query(sort: \Movie.title) private var movies: [Movie]
 	
 	let isNew: Bool
 	
@@ -25,8 +28,21 @@ struct FriendDetailView: View {
 	// MARK: - VIEW BODY
     var body: some View {
 		Form {
+			
 			TextField("Name", text: $friend.name)
 				.autocorrectionDisabled()
+			
+			Picker("Favorite Movie", selection: $friend.favoriteMovie) {
+				
+				Text("None")
+					.tag(nil as Movie?)
+				
+				ForEach(movies) { movie in
+					Text(movie.title)
+						.tag(movie as Movie?)
+				}
+			}
+			.pickerStyle(.menu)
 		}
 		.navigationTitle(isNew ? "New Friend" : "Friend")
 		.toolbar {
